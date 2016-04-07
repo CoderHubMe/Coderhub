@@ -155,7 +155,7 @@ class MY_Controller extends CI_Controller {
         // We'll make the view content available to the template.
         $data['view_content'] = $this->load->view($view, $data, TRUE);
         
-        // Check for theme data. If it doesn't exist, make an empty array --PH
+        // Set default theme options, then merge with provided theme options.--PH
         $defaultThemeOptions = array(
             'menu' => '',
             'title' => 'Here is a page',

@@ -31,7 +31,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?= base_url('index2.html') ?>" class="logo">
+    <a href="<?= base_url() ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">C<b>H</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -218,7 +218,7 @@
             <i class="fa fa-user"></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url() ?>"><i class="fa fa-circle-o"></i> View Resume</a></li>
+            <li><a href="<?= base_url('users/show_resume') ?>"><i class="fa fa-circle-o"></i> View Resume</a></li>
             <li><a href="<?= base_url() ?>"><i class="fa fa-circle-o"></i> Update Resume</a></li>
             <li><a href="<?= base_url() ?>"><i class="fa fa-circle-o"></i> User Settings</a></li>
           </ul>
@@ -254,7 +254,7 @@
         <?php
           foreach($theme['breadcrumbs'] as $text => $url) {
             if(strtolower($text) != 'home') {
-              echo "<li><a href='{$url}'>{$text}</li>";
+              echo "<li><a href='{$url}'>{$text}</a></li>";
             }
           }
         ?>
