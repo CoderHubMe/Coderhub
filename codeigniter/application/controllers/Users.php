@@ -9,7 +9,7 @@ class Users extends MY_Controller {
         $this->load->model("user_model", "user");
         $this->load->helper("url_helper");
         
-        $this->theme_options['menu'] = 'user';
+        $this->theme_options['menu'] = 'users';
     }
     
     public function index() {
