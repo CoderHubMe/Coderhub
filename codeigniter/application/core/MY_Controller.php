@@ -154,6 +154,26 @@ class MY_Controller extends CI_Controller {
 
         // We'll make the view content available to the template.
         $data['view_content'] = $this->load->view($view, $data, TRUE);
+        
+        // Check for theme data. If it doesn't exist, make an empty array --PH
+        $defaultThemeOptions = array(
+            'menu' => '',
+            'title' => 'Here is a page',
+            'subtitle' => 'with a subtitle',
+            'breadcrumbs' => array('home' => base_url())
+        );
+        
+        if(isset($data['theme'])) {
+            $data['theme'] = array_merge($defaultThemeOptions, $data['theme']);
+        } else {
+            $data['theme'] = $defaultThemeOptions;
+        }
+        // if(!isset($data['theme'])) {
+        //     $data['theme'] = array();
+        // }
+        // if(!isset($data['theme']['breadcrumbs'])) {
+        //     $data['theme']['breadcrumbs'] = '';
+        // }
 
         // Render our layout and we're done!
         $layout = empty($this->use_layout) ? 'index' : $this->use_layout;
