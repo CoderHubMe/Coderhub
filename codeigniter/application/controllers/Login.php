@@ -27,9 +27,11 @@ class Login extends MY_Controller {
             $user = $this->user->get_by('username', 'pah9qd');
             if($user != null && password_verify($_POST['password'], $user->password)) {
                 $data['login_success'] = true;
-                $_SESSION['userId'] = $user->id;
-                $_SESSION['username'] = $user->username;
-                $_SESSION['userEmail'] = $user->email;
+                $_SESSION['userId'] = isset($user->id) ? $user->id : null;
+                $_SESSION['username'] = isset($user->username) ? $user->username : '';
+                $_SESSION['userEmail'] = isset($user->email) ? $user->email : '';
+                $_SESSION['user_fname'] = isset($user->fname) ? $user->fname : '';
+                $_SESSION['user_lname'] = isset($user->lname) ? $user->lname : '';
             } else {
                 $data['login_success'] = false;
             }

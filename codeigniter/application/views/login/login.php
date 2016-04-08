@@ -78,11 +78,18 @@
     e.preventDefault();
     $(".help-block").remove();
     $("#password-form-group").removeClass('has-error');
+    
+    $('#signInBtn').addClass('disabled');
+    var signInBtnText = $('#signInBtn').html();
+    $("#signInBtn").html('<i class="fa fa-refresh fa-spin"></i>');
+    
     $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
       if(data.login_success == true) {
         window.location.href = '<?= base_url() ?>';
       } else {
         $("#password-form-group").addClass('has-error').append('<span class="help-block">Password Does Not Match Username</span>');
+        $('#signInBtn').removeClass('disabled');
+        $('#signInBtn').html(signInBtnText);
       }
     });
   });
