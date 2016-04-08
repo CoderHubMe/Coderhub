@@ -1,13 +1,15 @@
 <?php
 if(! defined("BASEPATH")) exit("No direct script access allowed");
 
-class Users extends CI_CONTROLLER {
+class Users extends MY_Controller {
+    private $theme_options = array();
     
     public function __construct() {
         parent::__construct();
-        $this->load->model("user_model");
+        $this->load->model("user_model", "user");
         $this->load->helper("url_helper");
-        $this->load->library("user_factory");
+        
+        $this->theme_options['menu'] = 'users';
     }
     
     public function index() {
@@ -15,16 +17,26 @@ class Users extends CI_CONTROLLER {
     }
     
     public function show($userId = 0) {
+        
+    }
+    
+    public function show_resume($userId = 0) {
         $userId = (int)$userId;
-        $data = array(
-            "users" => $this->user_factory->getUser($userId)
-        );
-        if($data['users']) {
-            $this->load->view("templates/header", $data);
-            $this->load->view("users/show_users", $data);
-            $this->load->view("templates/footer", $data);
-        } else {
+        
+        $this->theme_options['breadcrumbs'] = array(
+            'Home' => base_url(), 
+            'Users' => base_url('users'),
+            'Resume' => base_url('users/show_resume'));
+        $this->theme_options['title'] = 'User Resume';
+        $this->theme_options['subtitle'] = '';
+        
+        if(!is_int($userId)) {
             show_404();
+        } else {
+            $data = $this->user->get($userId);
+            $this->set_var('theme', $this->theme_options);
+            $this->set_var('user_data', $data);
+            $this->render();
         }
     }
 }
