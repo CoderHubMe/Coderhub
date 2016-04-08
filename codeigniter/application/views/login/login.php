@@ -35,11 +35,11 @@
 
     <form action="<?= base_url()?>" method="post" id="login-form">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username">
+        <input type="text" class="form-control" placeholder="Username" name="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+      <div class="form-group has-feedback" id="password-form-group">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -59,8 +59,8 @@
     </form>
     <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
-    <a href="<?= base_url('register') ?>" class="text-center">Register a new membership</a>
+    <a href="#" class='btn disabled'>I forgot my password</a><br>
+    <a href="<?= base_url('register') ?>" class="text-center btn disabled">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -74,15 +74,18 @@
 <!-- iCheck -->
 <script src="<?= base_url('/plugins/iCheck/icheck.min.js')?>"></script>
 <script>
-    $('#signInBtn').click(function(e) {
-      console.log("test");
-      e.preventDefault();
-      $.getJSON('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
-          if(data.success = true) {
-              window.location.href = "<?= base_url() ?>";
-          }
-      });
+  $('#signInBtn').click(function(e) {
+    e.preventDefault();
+    $(".help-block").remove();
+    $("#password-form-group").removeClass('has-error');
+    $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
+      if(data.login_success == true) {
+        window.location.href = '<?= base_url() ?>';
+      } else {
+        $("#password-form-group").addClass('has-error').append('<span class="help-block">Password Does Not Match Username</span>');
+      }
     });
+  });
 </script>
 </body>
 </html>

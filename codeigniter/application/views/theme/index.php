@@ -77,6 +77,9 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
+            <?php
+              if(isset($_SESSION['userId'])) {
+            ?>
             <!-- User Account Menu -->
             <li class="dropdown user user-menu">
               <!-- Menu Toggle Button -->
@@ -84,7 +87,7 @@
                 <!-- The user image in the navbar-->
                 <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">Pearse Hutson</span>
+                <span class="hidden-xs"><?= $_SESSION['username'] ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
@@ -92,8 +95,8 @@
                   <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
                   <p>
-                    Pearse Hutson - Web Developer
-                    <small>Member since Nov. 2012</small>
+                    <?= $_SESSION['username'] ?>
+                    <small>Member since Never</small>
                   </p>
                 </li>
                 <!-- Menu Body -->
@@ -111,11 +114,50 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="text-center">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="<?= base_url('login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                   </div>
                 </li>
               </ul>
             </li>
+            <?php // if(isset($_SESSION['userId'])) {
+              } else {  
+            ?>
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="<?= base_url('dist/img/avatar5.png') ?>" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">Guest</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  <img src="<?= base_url('dist/img/avatar5.png') ?>" class="img-circle" alt="User Image">
+
+                  <p>
+                    Guest
+                    <small>You are currently not signed in</small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
+                <li class="user-body">
+                  <div class="row">
+                    <div class="col-xs-6 text-center">
+                      <a href="<?= base_url('login') ?>" class="btn btn-default btn-flat">Sign In</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <a href="#" class="btn btn-default btn-flat">Register</a>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </li>
+              </ul>
+            </li>
+            <?php // } else { 
+              }
+            ?>
           </ul>
         </div>
         <!-- /.navbar-custom-menu -->
