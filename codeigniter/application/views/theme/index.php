@@ -148,7 +148,7 @@
                       <a href="<?= base_url('login') ?>" class="btn btn-default btn-flat">Sign In</a>
                     </div>
                     <div class="col-xs-6 text-center">
-                      <a href="#" class="btn btn-default btn-flat">Register</a>
+                      <a href="<?= base_url('login/register') ?>" class="btn btn-default btn-flat">Register</a>
                     </div>
                   </div>
                   <!-- /.row -->

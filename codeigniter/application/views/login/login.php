@@ -60,7 +60,7 @@
     <!-- /.social-auth-links -->
 
     <a href="#" class='btn disabled'>I forgot my password</a><br>
-    <a href="<?= base_url('register') ?>" class="text-center btn disabled">Register a new membership</a>
+    <a href="<?= base_url('login/register') ?>" class="text-center btn">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
