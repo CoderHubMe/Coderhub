@@ -38,7 +38,9 @@ class Login extends MY_Controller {
                     $_SESSION['user_company_admin'][] = $this->company->get($company_admin->company_id);
                 }
                 
-                
+                if(!isset($_SESSION['user_company_admin'])) {
+                    $_SESSION['user_company_admin'] = array();
+                }
                 
             } else {
                 $data['login_success'] = false;

@@ -141,8 +141,23 @@ class Companies extends MY_Controller {
         $this->render_json($data);
     }
     
-    // public function delete_action() {
-    //     $
-    // }
+    public function delete_action($companyId) {
+        if($companyId == null) {
+            // Go Away!
+        } 
+        $this->load->model('company_admin_model', 'company_admins');
+        $companyAdmin = $this->company_admins->get_by(array('company_id' => $companyId, 'user_id' => $_SESSION['userId']));
+        if($companyAdmin == null) {
+            // Go Away, not allowed! (prevent unauthorized users to delete)
+        } else {
+            $this->company->delete($companyId);
+            $this->company_admins->delete_by(array('company_id' => $companyId, 'user_id' => $_SESSION['userId']));
+            foreach($_SESSION['user_company_admin'] as $index => $company) {
+                if($company->id == $companyId) {
+                    unset($_SESSION['user_company_admin'][$index]);
+                }
+            }
+        }
+    }
     
 }
