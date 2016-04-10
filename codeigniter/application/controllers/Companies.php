@@ -48,4 +48,101 @@ class Companies extends MY_Controller {
         $this->render();
     }
     
+    public function edit($companyId = null) {
+        if($companyId == null) {
+            redirect();
+        }
+        $companyId = (int)$companyId;
+        $data = $this->company->get($companyId);
+        if($data == null) {
+            // Something
+        } else {
+            $this->load->model('company_admin_model', 'company_admins');
+            $companyAdmin = $this->company_admins->get_by(array('company_id' => $companyId, 'user_id' => $_SESSION['userId']));
+            if($companyAdmin == null) {
+                redirect();
+            } else {
+                $this->theme_options['title'] = 'Edit Company Profile';
+                $this->theme_options['subtitle'] = '';
+                $this->theme_options['breadcrumbs'] = array(
+                    'Companies' => base_url('companies/show_all'),
+                    'Edit ' . $data->name => base_url('companies/edit/' . $data->id)
+                );
+                $this->set_var('theme', $this->theme_options);
+                $this->set_var('company', $data);
+                $this->render();
+            }
+        }
+    }
+    
+    public function edit_action($companyId = null) {
+        if($companyId == null) {
+            // Go Away!
+        } 
+        $this->load->model('company_admin_model', 'company_admins');
+        $companyAdmin = $this->company_admins->get_by(array('company_id' => $companyId, 'user_id' => $_SESSION['userId']));
+        if($companyAdmin == null) {
+            // Go Away, not allowed!
+        }
+        $companyId = (int)$companyId;
+        if($this->company->update($companyId, array(
+            'name' => $_POST['name'],
+            'street_address' => $_POST['street_address'],
+            'owner' => $_POST['owner']
+        ))) {
+            $data['edit_success'] = true;
+        }
+        
+        if(!isset($data['edit_success']) || $data['edit_success'] != true) {
+            $data['edit_success'] = false;
+            $data['errors'] = $this->form_validation->error_array();
+        }
+        
+        $this->render_json($data);
+    }
+    
+    public function create(){
+        $this->theme_options['title'] = 'Create a Company';
+        $this->theme_options['subtitle'] = '';
+        $this->theme_options['breadcrumbs'] = array(
+            'Companies' => base_url('companies/show_all'),
+            'Create' => base_url('companies/create/')
+        );
+        
+        $this->set_var('theme', $this->theme_options);
+        $this->render();
+    }
+    
+    public function create_action() {
+        $insertData = array(
+            'name' => $_POST['name'],
+            'street_address' => $_POST['street_address'],
+            'owner' => $_POST['owner']
+        );
+        
+        if($newCompanyId = $this->company->insert($insertData)) {
+            $this->load->model('company_admin_model', 'company_admins');
+            $this->company_admins->insert(array('user_id' => $_SESSION['userId'], 'company_id' => $newCompanyId));
+            array_push($_SESSION['user_company_admin'], (object)array(
+                'id' => $newCompanyId,
+                'name' => $_POST['name'],
+                'street_address' => $_POST['street_address'],
+                'owner' => $_POST['owner']
+            ));
+            $data['newCompanyId'] = $newCompanyId;
+            $data['create_success'] = true;
+        }
+        
+        if(!isset($data['create_success']) || $data['create_success'] != true) {
+            $data['create_success'] = false;
+            $data['errors'] = $this->form_validation->error_array();
+        }
+        
+        $this->render_json($data);
+    }
+    
+    // public function delete_action() {
+    //     $
+    // }
+    
 }

@@ -65,6 +65,7 @@
           <!--    <input type="checkbox"> I agree to the <a href="#">terms</a>-->
           <!--  </label>-->
           <!--</div>-->
+          <a href="<?= base_url('login') ?>" class="text-center">I already have a membership</a>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -73,8 +74,6 @@
         <!-- /.col -->
       </div>
     </form>
-
-    <a href="<?= base_url('login') ?>" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>
