@@ -20,9 +20,9 @@ class User_model extends MY_Model {
         array( 'field' => 'password', 
               'label' => 'password',
               'rules' => 'min_length[10]' ),
-        array( 'field' => 'birthday',
-              'label' => 'birthday',
-              'rules' => '')
+        // array( 'field' => 'birthday',
+        //       'label' => 'birthday',
+        //       'rules' => 'regex_match[/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/]')
     );
     
     public function __construct() {
