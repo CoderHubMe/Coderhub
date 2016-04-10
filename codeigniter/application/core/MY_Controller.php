@@ -484,7 +484,7 @@ class MY_Controller extends CI_Controller {
     {
         if (strpos($filename, 'http') === FALSE)
         {
-            $filename = base_url() . 'assets/js/' . $filename;
+            $filename = base_url() . $filename;
         }
 
         $this->external_scripts[] = $filename;

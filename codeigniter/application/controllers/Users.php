@@ -40,6 +40,55 @@ class Users extends MY_Controller {
             $this->render();
         }
     }
+    
+    public function edit_action($userId = null) {
+        if($userId != null) {
+            $userId = (int)$userId;
+            
+            if($userId == $_SESSION['userId'] || $_SESSION['is_admin'] == 1) {
+                
+                $this->load->library('form_validation');
+                $validate_rules = array(
+                    array( 'field' => 'username', 
+                           'label' => 'username',
+                           'rules' => 'required|alpha_numeric|max_length[45]' ),
+                    array( 'field' => 'fname',
+                           'label' => 'first name',
+                           'rules' => 'required|alpha|max_length[45]' ),
+                    array( 'field' => 'lname',
+                           'label' => 'last name',
+                           'rules' => 'required|alpha|max_length[45]' ),
+                    array( 'field' => 'email', 
+                           'label' => 'email',
+                           'rules' => 'required|valid_email' ),
+                );
+                $this->form_validation->set_rules($validate_rules);
+                if($this->form_validation->run() !== FALSE) {
+                    $updateUserData = array(
+                        'username' => $_POST['username'],
+                        'fname' => $_POST['fname'],
+                        'lname' => $_POST['lname'],
+                        'email' => $_POST['email'],
+                        'birthday' => $_POST['birthday'],
+                    );  
+                    if($_SESSION['is_admin'] == 1) {
+                        $updateUserData['is_admin'] = $_POST['is_admin'];
+                    }
+                    
+                    if($this->user->update($userId, $updateUserData)) {
+                        $data['edit_success'] = true;
+                    }
+                }
+            }
+        }
+        
+        if(!isset($data['edit_success']) || $data['edit_success'] != true) {
+            $data['edit_success'] = false;
+            $data['errors'] = $this->form_validation->error_array();
+        }
+        
+        $this->render_json($data);
+    }
 }
 
 // first comment

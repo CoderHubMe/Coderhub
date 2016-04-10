@@ -33,12 +33,15 @@ class Login extends MY_Controller {
                 $_SESSION['userEmail'] = isset($user->email)   ? $user->email : '';
                 $_SESSION['user_fname'] = isset($user->fname)  ? $user->fname : '';
                 $_SESSION['user_lname'] = isset($user->lname)  ? $user->lname : '';
+                $_SESSION['is_admin'] = isset($user->is_admin) ? (int)$user->is_admin : 0;
                 
                 foreach($user->company_admins as $company_admin) {
                     $_SESSION['user_company_admin'][] = $this->company->get($company_admin->company_id);
                 }
                 
-                
+                if(!isset($_SESSION['user_company_admin'])) {
+                    $_SESSION['user_company_admin'] = array();
+                }
                 
             } else {
                 $data['login_success'] = false;
@@ -63,7 +66,7 @@ class Login extends MY_Controller {
         $validate_rules = array(
             array( 'field' => 'username', 
                    'label' => 'username',
-                   'rules' => 'required|alpha|max_length[45]|is_unique[users.username]' ),
+                   'rules' => 'required|alpha_numeric|max_length[45]|is_unique[users.username]' ),
             array( 'field' => 'fname',
                    'label' => 'first name',
                    'rules' => 'required|alpha|max_length[45]' ),
