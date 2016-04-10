@@ -14,8 +14,11 @@ class Home extends MY_Controller {
             'subtitle' => 'No Place Like Home',
             'breadcrumbs' => array('Home' => base_url())
         );
+        $this->load->model('user_model', 'user');
+        $data = $this->user->with('company_admins')->get_by('username', 'pah9qd');
         
         $this->set_var('theme', $theme);
+        $this->set_var('data', $data);
         $this->render();
     }
 }
