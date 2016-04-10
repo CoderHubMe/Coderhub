@@ -1,7 +1,11 @@
 <?php
 if(! defined("BASEPATH")) exit("No direct script access allowed");
 
+<<<<<<< HEAD
+class Admins extends MY_Controller {
+=======
 class Companies extends MY_Controller {
+>>>>>>> origin/pah9qd_sprint2
     private $theme_options = array();
     
     public function __construct() {
@@ -9,6 +13,22 @@ class Companies extends MY_Controller {
         $this->load->model("admin_model", "admin");
         $this->load->helper("url_helper");
         
+<<<<<<< HEAD
+        $this->theme_options['menu'] = 'admins';
+    }
+    
+    public function index() {
+        $this->render();
+    }
+    
+    public function show_users() {
+        $data = $this->user->get_all();
+        $this->render();
+    }
+}
+
+// first comment
+=======
         $this->theme_options['menu'] = 'companies';
     }
     
@@ -49,3 +69,4 @@ class Companies extends MY_Controller {
     }
     
 }
+>>>>>>> origin/pah9qd_sprint2
