@@ -820,6 +820,7 @@ class MY_Model extends CI_Model
 
             if(is_array($this->validate))
             {
+                $this->form_validation->reset_validation();
                 $this->form_validation->set_rules($this->validate);
 
                 if ($this->form_validation->run() === TRUE)

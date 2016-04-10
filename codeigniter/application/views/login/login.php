@@ -60,7 +60,7 @@
     <!-- /.social-auth-links -->
 
     <a href="#" class='btn disabled'>I forgot my password</a><br>
-    <a href="<?= base_url('register') ?>" class="text-center btn disabled">Register a new membership</a>
+    <a href="<?= base_url('login/register') ?>" class="text-center btn">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -78,11 +78,18 @@
     e.preventDefault();
     $(".help-block").remove();
     $("#password-form-group").removeClass('has-error');
+    
+    $('#signInBtn').addClass('disabled');
+    var signInBtnText = $('#signInBtn').html();
+    $("#signInBtn").html('<i class="fa fa-refresh fa-spin"></i>');
+    
     $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
       if(data.login_success == true) {
         window.location.href = '<?= base_url() ?>';
       } else {
         $("#password-form-group").addClass('has-error').append('<span class="help-block">Password Does Not Match Username</span>');
+        $('#signInBtn').removeClass('disabled');
+        $('#signInBtn').html(signInBtnText);
       }
     });
   });

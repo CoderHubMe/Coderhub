@@ -60,12 +60,16 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">View Connected Companies</a></li>
-                <li><a href="<?= base_url() ?>">Search For Company</a></li>
-                <li><a href="<?= base_url() ?>">Search For Company</a></li>
+                <li><a href="<?= base_url('companies/show_all') ?>">Search For Company</a></li>
                 <li class="divider"></li>
-                <li><a href="<?= base_url() ?>">Edit My Company</a></li>
-                <li><a href="<?= base_url() ?>">View My Company</a></li>
                 <li><a href="<?= base_url() ?>">Create A Company</a></li>
+                <?php
+                if(isset($_SESSION['user_company_admin'])) {
+                  foreach($_SESSION['user_company_admin'] as $company) {
+                    echo '<li><a href="' . base_url('companies/edit/' . $company->id) . '">Edit ' . $company->name . '</a></li>';
+                  }
+                }
+                ?>
                 
               </ul>
             </li>
@@ -87,7 +91,7 @@
                 <!-- The user image in the navbar-->
                 <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs"><?= $_SESSION['username'] ?></span>
+                <span class="hidden-xs"><?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
@@ -95,7 +99,7 @@
                   <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
                   <p>
-                    <?= $_SESSION['username'] ?>
+                    <?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?>
                     <small>Member since Never</small>
                   </p>
                 </li>
@@ -148,7 +152,7 @@
                       <a href="<?= base_url('login') ?>" class="btn btn-default btn-flat">Sign In</a>
                     </div>
                     <div class="col-xs-6 text-center">
-                      <a href="#" class="btn btn-default btn-flat">Register</a>
+                      <a href="<?= base_url('login/register') ?>" class="btn btn-default btn-flat">Register</a>
                     </div>
                   </div>
                   <!-- /.row -->
