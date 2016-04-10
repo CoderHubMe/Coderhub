@@ -2,6 +2,7 @@
 if(! defined("BASEPATH")) exit("No direct script access allowed");
 
 class Users extends MY_Controller {
+    
     private $theme_options = array();
     
     public function __construct() {

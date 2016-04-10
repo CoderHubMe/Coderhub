@@ -2,6 +2,8 @@
 
 class User_model extends MY_Model {
     
+    public $has_many = array('company_admins');
+    
     public $validate = array(
         array( 'field' => 'username', 
               'label' => 'username',

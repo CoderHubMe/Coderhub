@@ -22,9 +22,10 @@ class Login extends MY_Controller {
     
     public function login_action() {
         $this->load->model('user_model', 'user');
+        $this->load->model('company_model', 'company');
         
         if(isset($_POST['username'])) {
-            $user = $this->user->get_by('username', $_POST['username']);
+            $user = $this->user->with('company_admins')->get_by('username', $_POST['username']);
             if($user != null && password_verify($_POST['password'], $user->password)) {
                 $data['login_success'] = true;
                 $_SESSION['userId'] = isset($user->id)         ? $user->id : null;
@@ -32,6 +33,15 @@ class Login extends MY_Controller {
                 $_SESSION['userEmail'] = isset($user->email)   ? $user->email : '';
                 $_SESSION['user_fname'] = isset($user->fname)  ? $user->fname : '';
                 $_SESSION['user_lname'] = isset($user->lname)  ? $user->lname : '';
+                
+                foreach($user->company_admins as $company_admin) {
+                    $_SESSION['user_company_admin'][] = $this->company->get($company_admin->company_id);
+                }
+                
+                if(!isset($_SESSION['user_company_admin'])) {
+                    $_SESSION['user_company_admin'] = array();
+                }
+                
             } else {
                 $data['login_success'] = false;
             }

@@ -17,6 +17,19 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?= base_url('dist/css/skins/_all-skins.min.css') ?>">
+  
+    <!-- jQuery 2.2.0 -->
+  <script src="<?= base_url('plugins/jQuery/jQuery-2.2.0.min.js') ?>"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="<?= base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
+  <!-- SlimScroll -->
+  <script src="<?= base_url('plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
+  <!-- FastClick -->
+  <script src="<?= base_url('plugins/fastclick/fastclick.js') ?>"></script>
+  <!-- AdminLTE App -->
+  <script src="<?= base_url('dist/js/app.min.js') ?>"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="<?= base_url('dist/js/demo.js') ?>"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,12 +73,16 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">View Connected Companies</a></li>
-                <li><a href="<?= base_url() ?>">Search For Company</a></li>
-                <li><a href="<?= base_url() ?>">Search For Company</a></li>
+                <li><a href="<?= base_url('companies/show_all') ?>">Search For Company</a></li>
                 <li class="divider"></li>
-                <li><a href="<?= base_url() ?>">Edit My Company</a></li>
-                <li><a href="<?= base_url() ?>">View My Company</a></li>
-                <li><a href="<?= base_url() ?>">Create A Company</a></li>
+                <li><a href="<?= base_url('companies/create') ?>">Create A Company</a></li>
+                <?php
+                if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) {
+                  foreach($_SESSION['user_company_admin'] as $company) {
+                    echo '<li><a href="' . base_url('companies/edit/' . $company->id) . '">Edit ' . $company->name . '</a></li>';
+                  }
+                }
+                ?>
                 
               </ul>
             </li>
@@ -207,17 +224,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.2.0 -->
-<script src="<?= base_url('plugins/jQuery/jQuery-2.2.0.min.js') ?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?= base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
-<!-- SlimScroll -->
-<script src="<?= base_url('plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
-<!-- FastClick -->
-<script src="<?= base_url('plugins/fastclick/fastclick.js') ?>"></script>
-<!-- AdminLTE App -->
-<script src="<?= base_url('dist/js/app.min.js') ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?= base_url('dist/js/demo.js') ?>"></script>
+
 </body>
 </html>

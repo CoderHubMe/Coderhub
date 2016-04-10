@@ -1,1 +1,3 @@
-<h1>Test of the Theme</h1>
+<h1>Dump of $_SESSION Data</h1>
+<?php
+var_dump($_SESSION);
