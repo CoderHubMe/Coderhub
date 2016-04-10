@@ -87,7 +87,7 @@
                 <!-- The user image in the navbar-->
                 <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs"><?= $_SESSION['username'] ?></span>
+                <span class="hidden-xs"><?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
@@ -95,7 +95,7 @@
                   <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
                   <p>
-                    <?= $_SESSION['username'] ?>
+                    <?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?>
                     <small>Member since Never</small>
                   </p>
                 </li>
@@ -148,7 +148,7 @@
                       <a href="<?= base_url('login') ?>" class="btn btn-default btn-flat">Sign In</a>
                     </div>
                     <div class="col-xs-6 text-center">
-                      <a href="#" class="btn btn-default btn-flat">Register</a>
+                      <a href="<?= base_url('login/register') ?>" class="btn btn-default btn-flat">Register</a>
                     </div>
                   </div>
                   <!-- /.row -->
