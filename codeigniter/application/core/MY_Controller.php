@@ -168,12 +168,6 @@ class MY_Controller extends CI_Controller {
         } else {
             $data['theme'] = $defaultThemeOptions;
         }
-        // if(!isset($data['theme'])) {
-        //     $data['theme'] = array();
-        // }
-        // if(!isset($data['theme']['breadcrumbs'])) {
-        //     $data['theme']['breadcrumbs'] = '';
-        // }
 
         // Render our layout and we're done!
         $layout = empty($this->use_layout) ? 'index' : $this->use_layout;
