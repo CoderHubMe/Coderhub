@@ -22,10 +22,10 @@ class Admin extends MY_Controller {
         $this->load->model('user_model', 'user');
         $data = $this->user->get_all();
         $this->theme_options = array_merge($this->theme_options, array(
-            'title' => 'Administrate All Users', 
+            'title' => 'All Users', 
             'subtitle' => 'With great power comes great responsiblity', 
             'breadcrumbs' => array(
-                'Admin All Users' => 'admin/show_all_users')
+                'All Users' => '../admin/show_all_users')
             )
         );
         
@@ -34,9 +34,25 @@ class Admin extends MY_Controller {
         $this->render();
     }
     
+    public function show_all_skills() {
+        $this->load->model('skill_model', 'skill');
+        $data = $this->skill->get_all();
+        $this->theme_options = array_merge($this->theme_options, array(
+            'title' => 'All Skills', 
+            'subtitle' => 'With great power comes great responsiblity', 
+            'breadcrumbs' => array(
+                'All Skills' => '../admin/show_all_skills')
+            )
+        );
+        
+        $this->set_var('theme', $this->theme_options);
+        $this->set_var('skills', $data);
+        $this->render();
+    }
+    
     public function edit_user($userId = null) {
         if($userId == null) {
-            redirect('admin/show_all_users');
+            redirect('../admin/show_all_users');
         }
         $userId = (int)$userId;
         
@@ -47,8 +63,8 @@ class Admin extends MY_Controller {
             'title' => 'Edit User',
             'subtitle' => 'Be Nice Please',
             'breadcrumbs' => array(
-                'Admin All Users' => 'admin/show_all_users',
-                'Edit '.$data->username => 'admin/edit_user/'.$data->id)
+                'All Users' => '../edit_user/',
+                'Edit '.$data->username => '../edit_user/'.$data->id)
             )
         );
         
