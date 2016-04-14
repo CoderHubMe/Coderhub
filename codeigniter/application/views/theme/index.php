@@ -97,6 +97,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?= base_url('admin/show_all_users') ?>">Users</a></li>
+                <li><a href="<?= base_url('admin/show_all_users') ?>">Companies</a></li>
+                <li><a href="<?= base_url('admin/show_all_users') ?>">Reporting Tools</a></li>
+                <li class="divider"></li>
                 <li><a href="<?= base_url('admin/show_all_skills') ?>">Skills</a></li>
               </ul>
             </li>

@@ -36,7 +36,7 @@
     <form action="<?= base_url()?>" method="post" id="login-form">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" name="username">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback" id="password-form-group">
         <input type="password" class="form-control" placeholder="Password" name="password">

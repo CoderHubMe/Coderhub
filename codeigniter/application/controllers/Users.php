@@ -21,8 +21,18 @@ class Users extends MY_Controller {
         $this->load->view('users/authorize.php');
     }
     
-    public function show($userId = 0) {
+    public function profile($userId = 2) {
+        $userId = (int)$userId;
+        $data = $this->user->get($userId);
+        $this->theme_options = array_merge($this->theme_options, array(
+            'title' => $data->fname.' '.$data->lname,
+            'subtitle' => ''
+            )
+        );
         
+        $this->set_var("theme", $this->theme_options);
+        $this->set_var("user", $data);
+        $this->render();
     }
     
     
