@@ -52,7 +52,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?= base_url() ?>" class="navbar-brand">Coder<b>Hub</b>.me</a>
+          <a href="<?= base_url() ?>" class="navbar-brand">< Coder<b>Hub</b> /></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -62,31 +62,46 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="dropdown <?= menu_is_active('users', $theme) ? 'active' : '' ?>">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Search for user</a></li>
-              <?php if(isset($_SESSION['userId'])): ?>
-                <li><a href="#">View My Profile</a></li>
-                <li><a href="#">Edit My Profile</a></li>
-              <?php else: ?>
-                <li><a href="<?= base_url('login') ?>">Sign In</a></li>
-                <li><a href="<?= base_url('login/register') ?>">Sign Up</a></li>
-              <?php endif ?>
+                <li><a href="<?= base_url('users/profile') ?>">Profile</a></li>
+                <li><a href="<?= base_url('users/show_skills') ?>">Skills</a></li>
+                <li><a href="<?= base_url('users/show_resume') ?>">Resume</a></li>
               </ul>
             </li>
+            <li class="dropdown <?= menu_is_active('connections', $theme) ? 'active' : '' ?>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connections <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <?php
+                  if(isset($_SESSION['userId'])) {
+                    echo '<li><a href="#">View Connections</a></li>';
+                  }
+                ?>
+                <li><a href="<?= base_url() ?>">Find Users</a></li>
+              </ul>
             </li>
             <li class="dropdown <?= menu_is_active('companies', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= base_url('companies/show_all') ?>">Search For Company</a></li>
-              <?php if(isset($_SESSION['userId'])): ?>
-                <li><a href="#">View Connected Companies</a></li>
-                <li class="divider"></li>
-                <li><a href="' . base_url('companies/create') . '">Create A Company</a></li>
-                <?php if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) : ?>
-                  <li><a href="<?= base_url('companies/show_all') ?>">View My Companies</a></li>
-                <?php endif ?>
-              <?php endif ?>
+                <?php
+                  if(isset($_SESSION['userId'])){
+                    echo '<li><a href="#">View Connected Companies</a></li>';
+                  }
+                ?>
+                <li><a href="<?= base_url('companies/show_all') ?>">Find Company</a></li>
+  
+                <?php
+                  if(isset($_SESSION['userId'])){
+                    echo '<li class="divider"></li>';
+                    echo '<li><a href="' . base_url('companies/create') . '">Create A Company</a></li>';
+                  }
+                  
+                if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) {
+                  foreach($_SESSION['user_company_admin'] as $company) {
+                    echo '<li><a href="' . base_url('companies/edit/' . $company->id) . '">Edit ' . $company->name . '</a></li>';
+                  }
+                }
+                ?>
                 
               </ul>
             </li>
@@ -96,7 +111,8 @@
             <li class="dropdown <?= menu_is_active('admin', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= base_url('admin/show_all_users') ?>">Administrate All Users</a></li>
+                <li><a href="<?= base_url('admin/show_all_users') ?>">Users</a></li>
+                <li><a href="<?= base_url('admin/show_all_skills') ?>">Skills</a></li>
               </ul>
             </li>
             <?php

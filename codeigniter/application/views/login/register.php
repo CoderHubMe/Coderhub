@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CoderHub.me | Registration Page</title>
+  <title> CoderHub.me | Registration Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -27,7 +27,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="<?= base_url() ?>">Coder<b>Hub</b>.me</a>
+    <a href="<?= base_url() ?>"> < Coder<b>Hub</b> /> </a>
   </div>
 
   <div class="register-box-body">
@@ -58,6 +58,21 @@
         <input type="password" class="form-control" placeholder="Retype password" id="password-confirm" name="password-confirm">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback">
+        <div class="col-xs-8">
+          
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" id="submitBtn">Register</button>
+        </div>
+        <!-- /.col -->
+      </div>
+      <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-social btn-github btn-flat"><i class="fa fa-github"></i> Sign up using
+          Github</a>
+      </div>
       <div class="row">
         <div class="col-xs-8">
           <!--<div class="checkbox icheck">-->
@@ -67,11 +82,6 @@
           <!--</div>-->
           <a href="<?= base_url('login') ?>" class="text-center">I already have a membership</a>
         </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" id="submitBtn">Register</button>
-        </div>
-        <!-- /.col -->
       </div>
     </form>
   </div>

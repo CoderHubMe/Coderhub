@@ -16,8 +16,13 @@ class Login extends MY_Controller {
         if(isset($_SESSION['userId'])){
             redirect(); // redirects user back to the base page
         } else {
+            //$this->load->view('login/login.php');
             $this->load->view('login/login.php');
         }
+    }
+    
+    public function callback() {
+        $this->load->view('login/callback.php');
     }
     
     public function login_action() {
