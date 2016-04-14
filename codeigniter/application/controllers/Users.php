@@ -17,9 +17,15 @@ class Users extends MY_Controller {
         echo "This is the index!";
     }
     
+    public function authorize() {
+        $this->load->view('users/authorize.php');
+    }
+    
     public function show($userId = 0) {
         
     }
+    
+    
     
     public function show_resume($userId = 0) {
         $userId = (int)$userId;
