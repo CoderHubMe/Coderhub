@@ -34,7 +34,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer text-center">
-        <a href='<?= base_url('admin/delete_user/'.$user->id) ?>' class="btn btn-danger pull-left" id='delete_<?= $user->id ?>'>DELETE <?= $user->username ?></a>
+        <a href='<?= base_url('admin/delete_user_action/'.$user->id) ?>' class="btn btn-danger pull-left" id='delete_<?= $user->id ?>'>DELETE <?= $user->username ?></a>
         <a href='<?= base_url('admin/edit_user/'.$user->id) ?>' class="btn btn-primary pull-right" id='edit_<?= $user->id ?>'>Edit <?= $user->username ?></a>
       </div>
       <!-- /.box-footer -->
