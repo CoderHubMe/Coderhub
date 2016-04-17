@@ -92,7 +92,6 @@
     $('#signInBtn').addClass('disabled');
     var signInBtnText = $('#signInBtn').html();
     $("#signInBtn").html('<i class="fa fa-refresh fa-spin"></i>');
-    z
     $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
       if(data.login_success == true) {
         window.location.href = '<?= base_url() ?>';
