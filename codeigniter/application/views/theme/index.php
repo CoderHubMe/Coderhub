@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Top Navigation</title>
+  <title>CoderHub.me</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -64,44 +64,29 @@
             <li class="dropdown <?= menu_is_active('users', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= base_url('users/profile') ?>">Profile</a></li>
-                <li><a href="<?= base_url('users/show_skills') ?>">Skills</a></li>
-                <li><a href="<?= base_url('users/show_resume') ?>">Resume</a></li>
+                <li><a href="#">Search for user</a></li>
+              <?php if(isset($_SESSION['userId'])): ?>
+                <li><a href="<?= base_url('users/profile/' . $_SESSION['userId']) ?>">View My Profile</a></li>
+                <li><a href="#">Edit My Profile</a></li>
+              <?php else: ?>
+                <li><a href="<?= base_url('login') ?>">Sign In</a></li>
+                <li><a href="<?= base_url('login/register') ?>">Sign Up</a></li>
+              <?php endif ?>
               </ul>
             </li>
-            <li class="dropdown <?= menu_is_active('connections', $theme) ? 'active' : '' ?>">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connections <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <?php
-                  if(isset($_SESSION['userId'])) {
-                    echo '<li><a href="#">View Connections</a></li>';
-                  }
-                ?>
-                <li><a href="<?= base_url() ?>">Find Users</a></li>
-              </ul>
             </li>
             <li class="dropdown <?= menu_is_active('companies', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <?php
-                  if(isset($_SESSION['userId'])){
-                    echo '<li><a href="#">View Connected Companies</a></li>';
-                  }
-                ?>
-                <li><a href="<?= base_url('companies/show_all') ?>">Find Company</a></li>
-  
-                <?php
-                  if(isset($_SESSION['userId'])){
-                    echo '<li class="divider"></li>';
-                    echo '<li><a href="' . base_url('companies/create') . '">Create A Company</a></li>';
-                  }
-                  
-                if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) {
-                  foreach($_SESSION['user_company_admin'] as $company) {
-                    echo '<li><a href="' . base_url('companies/edit/' . $company->id) . '">Edit ' . $company->name . '</a></li>';
-                  }
-                }
-                ?>
+                <li><a href="<?= base_url('companies/show_all') ?>">Search For Company</a></li>
+              <?php if(isset($_SESSION['userId'])): ?>
+                <li><a href="#">View Connected Companies</a></li>
+                <li class="divider"></li>
+                <li><a href="' . base_url('companies/create') . '">Create A Company</a></li>
+                <?php if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) : ?>
+                  <li><a href="<?= base_url('companies/show_all') ?>">View My Companies</a></li>
+                <?php endif ?>
+              <?php endif ?>
                 
               </ul>
             </li>
@@ -112,6 +97,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?= base_url('admin/show_all_users') ?>">Users</a></li>
+                <li><a href="<?= base_url('admin/show_all_users') ?>">Companies</a></li>
+                <li><a href="<?= base_url('admin/show_all_users') ?>">Reporting Tools</a></li>
+                <li class="divider"></li>
                 <li><a href="<?= base_url('admin/show_all_skills') ?>">Skills</a></li>
               </ul>
             </li>
@@ -147,20 +135,20 @@
                   </p>
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-6 text-center">
-                      <a href="#">Profile</a>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                      <a href="#">Connections</a>
-                    </div>
-                  </div>
+                <!--<li class="user-body">-->
+                  <!--<div class="row">-->
+                  <!--  <div class="col-xs-6 text-center">-->
+                  <!--    <a href="#">Profile</a>-->
+                  <!--  </div>-->
+                  <!--</div>-->
                   <!-- /.row -->
-                </li>
+                <!--</li>-->
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                  <div class="text-center">
+                  <div class="col-xs-6 text-center">
+                    <a href="<?= base_url('login/logout') ?>" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="col-xs-6 text-center">
                     <a href="<?= base_url('login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                   </div>
                 </li>
