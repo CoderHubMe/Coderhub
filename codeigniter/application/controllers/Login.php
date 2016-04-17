@@ -22,7 +22,35 @@ class Login extends MY_Controller {
     }
     
     public function callback() {
-        $this->load->view('login/callback.php');
+        $this->load->model("user_model", "user");
+        require_once(APPPATH . "/libraries/github-helper.php");
+    
+        $response = git_token($_GET['code']);
+        parse_str($response, $output);
+        $token = $output['access_token'];
+    
+        $user_data = git_user($response);
+        $user = json_decode($user_data, true);
+    
+        $uname = $user['login'];
+        $email = $user['email'];
+        $image = $user['avatar_url'];
+        
+        $name = explode(" ", $user['name']);
+        $first = $name[0];
+        $last = $name[count($name) - 1];
+        
+        $new_user = array(
+            "user" => $uname,
+            "email" => $email,
+            "fname" => $first,
+            "lname" => $last,
+            "pimage" => $image,
+            "token" => $token,
+
+        );
+        
+        $this->load->view('login/register.php', $new_user);
     }
     
     public function login_action() {
@@ -61,7 +89,15 @@ class Login extends MY_Controller {
         if(isset($_SESSION['userId'])){
             redirect(); // redirects user back to the base page
         } else {
-            $this->load->view('login/register.php');
+            $new_user = array(
+                "user" => "",
+                "email" => "",
+                "fname" => "",
+                "lname" => "",
+                "pimage" => "",
+                "token" => "",
+            );
+            $this->load->view('login/register.php', $new_user);
         }
     }
     
@@ -94,7 +130,8 @@ class Login extends MY_Controller {
         );
         $this->form_validation->set_rules($validate_rules);
         
-        if(isset($_POST['username'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
+        if(isset($_POST['username'], $_POST['fname'], $_POST['lname'], 
+            $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
             if($this->form_validation->run() !== FALSE) {
                 $this->load->model('user_model', 'user');
                 if($this->user->insert(array(
@@ -102,7 +139,9 @@ class Login extends MY_Controller {
                     'fname' => $_POST['fname'],
                     'lname' => $_POST['lname'],
                     'email' => $_POST['email'],
-                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'token' => $_POST['token'],
+                    'github_username' => $_POST['github_username']
                 ))) {
                     $data['register_success'] = true;
                 } 

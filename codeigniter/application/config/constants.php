@@ -85,5 +85,4 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 defined('CLIENT_ID')           OR define('CLIENT_ID', '0c8176b3d2ae7ab18ea0');
-defined('CLIENT_SECRET')           OR define('CLIENT_SECRET', 'd560c29afc804bc4908c80558fec615146fc49a0');
-
+defined('CLIENT_SECRET')       OR define('CLIENT_SECRET', 'd560c29afc804bc4908c80558fec615146fc49a0');

@@ -25,11 +25,7 @@ class Admin extends MY_Controller {
             'title' => 'All Users', 
             'subtitle' => 'With great power comes great responsiblity', 
             'breadcrumbs' => array(
-<<<<<<< HEAD
-                'All Users' => '../admin/show_all_users')
-=======
                 'Admin All Users' => base_url('admin/show_all_users'))
->>>>>>> 2df50b6b10b9657563e192eb2a855c853adb6f65
             )
         );
         

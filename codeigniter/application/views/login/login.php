@@ -54,15 +54,10 @@
       </div>
     </form>
     <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <form action="https://github.com/login/oauth/authorize" method='GET'>
-        <input type="hidden" name="client_id" value=<?= CLIENT_ID ?>>
-        <button class="btn btn-block btn-social btn-github btn-flat">
-          <i class="fa fa-github"></i> 
-          Sign in using Github
-        </button>
-      </form>
-    </div>
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-social btn-github btn-flat"><i class="fa fa-github"></i> Sign up using
+          Github</a>
+      </div>
     <div class="row">
       <div class="col-xs-8">
         <!--<div class="checkbox icheck">-->
@@ -97,7 +92,7 @@
     $('#signInBtn').addClass('disabled');
     var signInBtnText = $('#signInBtn').html();
     $("#signInBtn").html('<i class="fa fa-refresh fa-spin"></i>');
-    
+    z
     $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
       if(data.login_success == true) {
         window.location.href = '<?= base_url() ?>';
