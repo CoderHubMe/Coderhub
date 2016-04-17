@@ -63,18 +63,8 @@ class Admin extends MY_Controller {
             'title' => 'Edit User',
             'subtitle' => 'Be Nice Please',
             'breadcrumbs' => array(
-<<<<<<< da25824914da309c28e31f6c306cf223162b7649
-<<<<<<< bc07a63ad6a744bb25f2fc20f5ba1ef387b4324f
                 'Admin All Users' => base_url('admin/show_all_users'),
                 'Edit '.$data->username => base_url('admin/edit_user/'.$data->id)
-=======
-                'All Users' => '../edit_user/',
-                'Edit '.$data->username => '../edit_user/'.$data->id)
->>>>>>> Commit
-=======
-                'Admin All Users' => base_url('admin/show_all_users'),
-                'Edit '.$data->username => base_url('admin/edit_user/'.$data->id)
->>>>>>> Starting user profile
             )
         ));
         
