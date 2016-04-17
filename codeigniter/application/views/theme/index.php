@@ -74,19 +74,39 @@
               <?php endif ?>
               </ul>
             </li>
+            <li class="dropdown <?= menu_is_active('connections', $theme) ? 'active' : '' ?>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connections <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <?php
+                  if(isset($_SESSION['userId'])) {
+                    echo '<li><a href="#">View Connections</a></li>';
+                  }
+                ?>
+                <li><a href="<?= base_url() ?>">Find Users</a></li>
+              </ul>
             </li>
             <li class="dropdown <?= menu_is_active('companies', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= base_url('companies/show_all') ?>">Search For Company</a></li>
-              <?php if(isset($_SESSION['userId'])): ?>
-                <li><a href="#">View Connected Companies</a></li>
-                <li class="divider"></li>
-                <li><a href="' . base_url('companies/create') . '">Create A Company</a></li>
-                <?php if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) : ?>
-                  <li><a href="<?= base_url('companies/show_all') ?>">View My Companies</a></li>
-                <?php endif ?>
-              <?php endif ?>
+                <?php
+                  if(isset($_SESSION['userId'])){
+                    echo '<li><a href="#">View Connected Companies</a></li>';
+                  }
+                ?>
+                <li><a href="<?= base_url('companies/show_all') ?>">Find Company</a></li>
+  
+                <?php
+                  if(isset($_SESSION['userId'])){
+                    echo '<li class="divider"></li>';
+                    echo '<li><a href="' . base_url('companies/create') . '">Create A Company</a></li>';
+                  }
+                  
+                if(isset($_SESSION['user_company_admin']) && is_array($_SESSION['user_company_admin'])) {
+                  foreach($_SESSION['user_company_admin'] as $company) {
+                    echo '<li><a href="' . base_url('companies/edit/' . $company->id) . '">Edit ' . $company->name . '</a></li>';
+                  }
+                }
+                ?>
                 
               </ul>
             </li>
