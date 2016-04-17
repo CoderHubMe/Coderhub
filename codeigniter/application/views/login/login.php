@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CoderHub.me | Log in</title>
+  <title>CoderHub | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -27,7 +27,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?= base_url()?>">Coder<b>Hub</b>.me</a>
+    <a href="<?= base_url()?>"> < Coder<b>Hub</b> /> </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -42,14 +42,9 @@
         <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <div class="row">
+      <div class="form-group has-feedback">
         <div class="col-xs-8">
-          <!--<div class="checkbox icheck">-->
-          <!--  <label>-->
-          <!--    <input type="checkbox"> Remember Me-->
-          <!--  </label>-->
-          <!--</div>-->
-          <a href="<?= base_url('login/register') ?>" class="text-center btn">Register a new membership</a>
+          
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -58,6 +53,21 @@
         <!-- /.col -->
       </div>
     </form>
+    <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-social btn-github btn-flat"><i class="fa fa-github"></i> Sign up using
+          Github</a>
+      </div>
+    <div class="row">
+      <div class="col-xs-8">
+        <!--<div class="checkbox icheck">-->
+        <!--  <label>-->
+        <!--    <input type="checkbox"> I agree to the <a href="#">terms</a>-->
+        <!--  </label>-->
+        <!--</div>-->
+        <a href="<?= base_url('/login/register') ?>" class="text-center">Register a new membership</a>
+      </div>
+    </div>
     <!-- /.social-auth-links -->
 
     <!--<a href="#" class='btn disabled'>I forgot my password</a><br>-->
@@ -82,7 +92,7 @@
     $('#signInBtn').addClass('disabled');
     var signInBtnText = $('#signInBtn').html();
     $("#signInBtn").html('<i class="fa fa-refresh fa-spin"></i>');
-    
+    z
     $.post('<?= base_url('login/login_action') ?>', $('#login-form').serialize(), function(data) {
       if(data.login_success == true) {
         window.location.href = '<?= base_url() ?>';

@@ -100,7 +100,7 @@
     
     $.post('<?= base_url('users/edit_action/'.$user->id) ?>', $('#user-update-form').serialize(), function(data) {
       if(data.edit_success == true) {
-        window.location.href = '<?= base_url('admin/show_all_users') ?>';
+        window.location.href = '<?= base_url('../public/admin/show_all_users') ?>';
       } else {
         console.dir(data);
         $.each(data.errors, function( key, value ) {
@@ -122,6 +122,6 @@
   $('#deleteBtn').click(function(e) {
     e.preventDefault();
     $.post("<?= base_url('users/delete_action/'.$user->id) ?>", {'userId': <?= $user->id ?> });
-    window.location.href = '<?= base_url('admin/show_all_users') ?>';
+    window.location.href = '<?= base_url('../public/admin/show_all_users') ?>';
   })
 </script>
