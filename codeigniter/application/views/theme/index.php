@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Top Navigation</title>
+  <title>CoderHub.me</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -66,7 +66,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Search for user</a></li>
               <?php if(isset($_SESSION['userId'])): ?>
-                <li><a href="#">View My Profile</a></li>
+                <li><a href="<?= base_url('users/profile/' . $_SESSION['userId']) ?>">View My Profile</a></li>
                 <li><a href="#">Edit My Profile</a></li>
               <?php else: ?>
                 <li><a href="<?= base_url('login') ?>">Sign In</a></li>

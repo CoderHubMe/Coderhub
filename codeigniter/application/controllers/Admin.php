@@ -52,7 +52,7 @@ class Admin extends MY_Controller {
     
     public function edit_user($userId = null) {
         if($userId == null) {
-            redirect('../admin/show_all_users');
+            redirect('/admin/show_all_users');
         }
         $userId = (int)$userId;
         
