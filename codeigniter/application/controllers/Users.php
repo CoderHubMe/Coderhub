@@ -114,6 +114,17 @@ class Users extends MY_Controller {
         
         $this->render_json($data);
     }
+    
+    public function find_users($search = 'null', $offset = 0, $limit = 15) {
+        if($search === '' || $search === 'null') {
+            $data = $this->user->limit($limit, $offset)->get_all();
+        } else {
+            $data = $this->user->limit($limit, $offset)->search($search, array('fname', 'lname', 'email'))->get_all();
+        }
+        $this->set_var('theme', $this->theme_options);
+        $this->set_var('users', $data);
+        $this->render();
+    }
 }
 
 // first comment

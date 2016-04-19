@@ -62,4 +62,22 @@ class User_model extends MY_Model {
         // $result = $this->_database->get()->{$this->_return_type(1)}();
         return $result;
     }
+    
+    public function search($searchKey, $fieldsToSearch) {
+        if(is_array($fieldsToSearch)) {
+            $orFlag = false;
+            foreach($fieldsToSearch as $field) {
+                if($orFlag == false){
+                    $this->_database->like($field, $searchKey);
+                    $orFlag = true;
+                } else {
+                    $this->_database->or_like($field, $searchKey);
+                }
+            } 
+        } else {
+            $this->_database->where($field, $searchKey);
+        }
+        
+        return $this;
+    }
 }
