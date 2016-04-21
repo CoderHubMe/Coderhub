@@ -43,23 +43,6 @@ class Users extends MY_Controller {
         $this->render();
     }
     
-    public function profile() {
-        if(!isset($_SESSION['userId'])) {
-            redirect();
-        }
-        else {
-            $userId = (int)$_SESSION['userId'];
-            if(!is_int($userId)) {
-                show_404();
-            } else {
-                $data = $this->user->get($userId);
-                $this->set_var('theme', $this->theme_options);
-                $this->set_var('user_data', $data);
-                $this->render();
-            }
-        }
-    }
-    
     
     
     public function show_resume() {

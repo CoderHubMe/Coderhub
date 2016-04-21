@@ -1,16 +1,15 @@
 <?php
   require_once(APPPATH . "/libraries/github-helper.php");
-  $user = (array)$user_data;
 ?>
 <div class="row">
   <div class="col-md-3">
     <!-- Profile Image -->
     <div class="box box-primary">
       <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" src="<?=$_SESSION['profile_image']?>" alt="User profile picture">
-        <h3 class="profile-username text-center"><?=$_SESSION['user_fname']?> <?=$_SESSION['user_lname']?></h3>
+        <img class="profile-user-img img-responsive img-circle" src="<?= isset($user->profile_image_url) ? $user->profile_image_url : base_url('dist/img/avatar5.png')  ?>" alt="User profile picture">
+        <h3 class="profile-username text-center"><?= $user->fname ?> <?= $user->lname ?></h3>
 
-        <ul class="list-group list-group-unbordered">
+        <ul class="list-group list-group-unbsessordered">
           <li class="list-group-item">
             <b>Connection</b> <a class="pull-right">1,322</a>
           </li>

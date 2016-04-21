@@ -82,7 +82,7 @@
                     echo '<li><a href="#">View Connections</a></li>';
                   }
                 ?>
-                <li><a href="<?= base_url() ?>">Find Users</a></li>
+                <li><a href="<?= base_url('users/find_users') ?>">Find Users</a></li>
               </ul>
             </li>
             <li class="dropdown <?= menu_is_active('companies', $theme) ? 'active' : '' ?>">
