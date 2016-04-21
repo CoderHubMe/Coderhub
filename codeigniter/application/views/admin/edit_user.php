@@ -50,7 +50,6 @@
         <!-- /.box-body -->
 
         <div class="box-footer">
-          <button type="button
           <button type="submit" class="btn btn-primary pull-right" id='submitBtn'>Submit</button>
         </div>
       </form>
@@ -100,7 +99,7 @@
     
     $.post('<?= base_url('users/edit_action/'.$user->id) ?>', $('#user-update-form').serialize(), function(data) {
       if(data.edit_success == true) {
-        window.location.href = '<?= base_url('../public/admin/show_all_users') ?>';
+        window.location.href = '<?= base_url('/admin/show_all_users') ?>';
       } else {
         console.dir(data);
         $.each(data.errors, function( key, value ) {

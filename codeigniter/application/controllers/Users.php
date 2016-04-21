@@ -21,8 +21,26 @@ class Users extends MY_Controller {
         $this->load->view('users/authorize.php');
     }
     
-    public function show($userId = 0) {
+    public function profile($userId = 0) {
+        if($userId === 0) {
+            redirect();
+        }
+        $userId = (int)$userId;
+        $data = $this->user->get_everything($userId);
+        $this->theme_options = array_merge($this->theme_options, array(
+            'title' => '',
+            'subtitle' => '',
+            'breadcrumbs' => array(
+                'Users' => base_url("users"),
+                $data->fname . ' ' . $data->lname => base_url("users/profile/" . $data->id)
+                )
+            )
+        );
         
+        $this->set_var("theme", $this->theme_options);
+        $this->set_var("user", $data);
+        // var_dump($data);
+        $this->render();
     }
     
     public function profile() {
@@ -98,9 +116,10 @@ class Users extends MY_Controller {
                         'lname' => $_POST['lname'],
                         'email' => $_POST['email'],
                         'birthday' => $_POST['birthday'],
+                        'github_username' => $_POST['github_username']
                     );  
                     if($_SESSION['is_admin'] == 1) {
-                        $updateUserData['is_admin'] = $_POST['is_admin'];
+                        $updateUserData['is_admin'] = (int)$_POST['is_admin'];
                     }
                     
                     if($this->user->update($userId, $updateUserData)) {
@@ -116,6 +135,17 @@ class Users extends MY_Controller {
         }
         
         $this->render_json($data);
+    }
+    
+    public function find_users($search = 'null', $offset = 0, $limit = 15) {
+        if($search === '' || $search === 'null') {
+            $data = $this->user->limit($limit, $offset)->get_all();
+        } else {
+            $data = $this->user->limit($limit, $offset)->search($search, array('fname', 'lname', 'email'))->get_all();
+        }
+        $this->set_var('theme', $this->theme_options);
+        $this->set_var('users', $data);
+        $this->render();
     }
 }
 
