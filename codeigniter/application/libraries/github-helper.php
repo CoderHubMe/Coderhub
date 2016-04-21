@@ -3,10 +3,23 @@
         $base_url = 'https://github.com/';
         $data = array('client_id' => CLIENT_ID, 'client_secret' => CLIENT_SECRET, 'code' => $code);
         $url = $base_url . "login/oauth/access_token?";
-        return curl( $url, $data);
+        return curl_post( $url, $data);
     }
     
-    function curl($url, $data) {
+    function git_repos($username) {
+        $url = 'https://api.github.com/users/' . $username . '/repos';
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url,
+            CURLOPT_USERAGENT => 'Coderhub'
+        ));
+        $response = curl_exec( $curl );
+        curl_close($curl);
+        return $response;
+    }
+    
+    function curl_post($url, $data) {
         $myvars = http_build_query($data);
 
         $ch = curl_init( $url );
@@ -16,7 +29,9 @@
         curl_setopt( $ch, CURLOPT_HEADER, 0);
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 
-        return curl_exec( $ch );
+        $response = curl_exec( $ch );
+        curl_close($ch);
+        return $response;
     }
     
     function git_user($response) {

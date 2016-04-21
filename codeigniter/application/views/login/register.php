@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> CoderHub.me | Registration Page</title>
   <!-- Tell the browser to be responsive to screen width -->
+  <META http-equiv="refresh" content="URL=google.com">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>">
@@ -58,30 +59,9 @@
         <input type="password" class="form-control" placeholder="Retype password" id="password-confirm" name="password-confirm">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
-      <input type="hidden" name="token" value="<?= $token ?>">
-      <input type="hidden" name="github_username" value=<?= "$user" ?>>
-      <div class="form-group has-feedback">
-        <div class="col-xs-8">
-          
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" id="submitBtn">Register</button>
-        </div>
-        <!-- /.col -->
-        </form>
-      </div>
-      <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <form action="https://github.com/login/oauth/authorize" method='GET'>
-          <input type="hidden" name="client_id" value=<?= CLIENT_ID ?>>
-          <input type="hidden" name="scope" value=<?= "user,repo" ?>>
-          <button class="btn btn-block btn-social btn-github btn-flat">
-            <i class="fa fa-github"></i> 
-            Sign in using Github
-          </button>
-        </form>
-      </div>
+      <input class="form-group has-feedback" type="hidden" name="token" value='<?= $token ?>' readonly>
+      <input class="form-group has-feedback" type="hidden" name="github_username" value='<?= $user ?>' readonly>
+      <input class="form-group has-feedback" type="hidden" name="profile_image" value='<?= "$pimage" ?>' readonly>
       <div class="row">
         <div class="col-xs-8">
           <!--<div class="checkbox icheck">-->
@@ -91,7 +71,24 @@
           <!--</div>-->
           <a href="<?= base_url('login') ?>" class="text-center">I already have a membership</a>
         </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" id="submitBtn">Register</button>
+        </div>
+        <!-- /.col -->
       </div>
+    </form>
+    <div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <form action="https://github.com/login/oauth/authorize" method='GET'>
+        <input type="hidden" name="client_id" value=<?= CLIENT_ID ?>>
+        <input type="hidden" name="scope" value=<?= "user,repo" ?>>
+        <button class="btn btn-block btn-social btn-github btn-flat">
+          <i class="fa fa-github"></i> 
+          Sign in using Github
+        </button>
+      </form>
+    </div>
   </div>
   <!-- /.form-box -->
 </div>
@@ -116,7 +113,7 @@
     var submitBtnText = $('#submitBtn').html();
     $("#submitBtn").html('<i class="fa fa-refresh fa-spin"></i>');
     
-    $.post("<?= base_url('login/register_action') ?>", $("#registerForm").serialize(), function(data) {
+    $.post("<?= base_url('Login/register_action') ?>", $("#registerForm").serialize(), function(data) {
       if(data.register_success == true) {
         window.location.href = '<?= base_url('login') ?>';
       } else {

@@ -132,15 +132,15 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
+                <img src="<?= $_SESSION['profile_image'] ?>" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs"><?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="<?= base_url('dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
-
+                  
+                  <img src="<?= $_SESSION['profile_image'] ?>" class="img-circle" alt="User Image">
                   <p>
                     <?= $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ?>
                     <small>Member since Never</small>
