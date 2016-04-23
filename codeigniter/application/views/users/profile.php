@@ -11,11 +11,13 @@
 
         <ul class="list-group list-group-unbsessordered">
           <li class="list-group-item">
-            <b>Connection</b> <a class="pull-right">1,322</a>
+            <b><?= count($user->accepted_connections) == 1 ? 'Connection' : 'Connections' ?></b> <a class="pull-right"><?= count($user->accepted_connections) ?></a>
           </li>
         </ul>
-
-        <a href="#" class="btn btn-primary btn-block"><b>Connect With Me</b></a>
+      <?php if($user->id !== $_SESSION['userId']): ?>
+        
+        <a href="<?= base_url('connections/request_connection/' . $_SESSION['userId'] . '/' . $user->id) ?>" class="btn btn-primary btn-block"><b>Connect With Me</b></a>
+      <?php endif ?>
       </div>
       <!-- /.box-body -->
     </div>
@@ -54,6 +56,10 @@
         <li class="active"><a href="#work_history" data-toggle="tab">Work History</a></li>
         <li><a href="#education_history" data-toggle="tab">Education History</a></li>
         <li><a href="#github" data-toggle="tab">GitHub</a></li>
+        <li><a href="#connections" data-toggle="tab">Connections</a></li>
+      <?php if($user->id === $_SESSION['userId']): ?>
+        <li><a href="#pending_connections" data-toggle="tab">Pending Connections</a></li>
+      <?php endif ?>
       </ul>
       <div class="tab-content">
         <div class="active tab-pane" id="work_history">
@@ -112,7 +118,46 @@
           ?>
         </div>
         <!-- /.tab-pane -->
-      </div>
+        <div class="tab-pane" id="connections">
+        <?php foreach($user->accepted_connections as $connection): ?>
+          <!-- Post -->
+          <div class="post clearfix">
+            <p>
+              <a href="<?= base_url('users/profile/' . $connection->id) ?>">
+                <b><?= $connection->username ?></b> 
+                <?= $connection->fname ?>
+                <?= $connection->lname ?>
+              </a><br>
+            </p>
+          </div>
+          <!-- /.post -->
+        <?php endforeach ?>
+        </div>
+      <!-- /.tab-content -->
+      <?php if($user->id === $_SESSION['userId']): ?>
+        <div class="tab-pane" id="pending_connections">
+        <?php foreach($user->requested_connections as $connection): ?>
+          <!-- Post -->
+          <div class="post clearfix">
+            <!--<div class="row">-->
+              <div class="col-md-8">
+                <a href="<?= base_url('users/profile/' . $connection->id) ?>">
+                  <b><?= $connection->username ?></b> 
+                  <?= $connection->fname ?> <?= $connection->lname ?>
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a href="#" class="btn btn-primary">Add Me!</a>
+              </div>
+              <div class="col-md-2">
+                <a href="#" class="btn btn-danger">Block Me</a>
+              </div>
+            <!--</div>-->
+          </div>
+          <!-- /.post -->
+        <?php endforeach ?>
+        </div>
+      <?php endif ?>
       <!-- /.tab-content -->
     </div>
     <!-- /.nav-tabs-custom -->
