@@ -64,7 +64,7 @@
             <li class="dropdown <?= menu_is_active('users', $theme) ? 'active' : '' ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Search for user</a></li>
+                <li><a href="<?= base_url('users/find_users') ?>">Search for user</a></li>
               <?php if(isset($_SESSION['userId'])): ?>
                 <li><a href="<?= base_url('users/profile/' . $_SESSION['userId']) ?>">View My Profile</a></li>
                 <li><a href="#">Edit My Profile</a></li>
@@ -82,7 +82,7 @@
                     echo '<li><a href="#">View Connections</a></li>';
                   }
                 ?>
-                <li><a href="<?= base_url() ?>">Find Users</a></li>
+                <li><a href="<?= base_url('users/find_users') ?>">Find Users</a></li>
               </ul>
             </li>
             <li class="dropdown <?= menu_is_active('companies', $theme) ? 'active' : '' ?>">
@@ -156,7 +156,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="col-xs-6 text-center">
-                    <a href="<?= base_url('login/logout') ?>" class="btn btn-default btn-flat">Profile</a>
+                    <a href="<?= base_url('users/profile/' . $_SESSION['userId']) ?>" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="col-xs-6 text-center">
                     <a href="<?= base_url('login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>

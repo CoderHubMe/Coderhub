@@ -69,9 +69,29 @@ class User_model extends MY_Model {
         $this->_database->where('user_skills.user_id', $userId);
         $result->skills = $this->_database->get()->{$this->_return_type(1)}();
         
-        // $this->_database->join('user_education_nodes', 'users.id = user_education_nodes.user_id');
-        // $this->_database->join('education_nodes', 'user_education_nodes.education_node_id = education_nodes.id');
-        // $result = $this->_database->get()->{$this->_return_type(1)}();
+        // Get all accepted connections
+        $this->_database->select('users.fname, users.lname, users.username, users.id, users.profile_image_url')
+            ->from('connections')
+            ->join('users', 'connections.user_id_requestor=users.id OR connections.user_id_connection=users.id')
+            ->group_start()
+                ->where('user_id_requestor', $userId)
+                ->or_where('user_id_connection', $userId)
+            ->group_end()
+            ->where('connections.is_accepted !=', 0)
+            ->where('connections.is_blocked', 0)
+            ->where('users.id !=', $userId);
+        $result->accepted_connections = $this->_database->get()->{$this->_return_type(1)}();
+        
+        
+        // Get all requested connections
+        $this->_database->select('users.fname, users.lname, users.username, users.id, users.profile_image_url')
+            ->from('connections')
+            ->join('users', 'connections.user_id_requestor=users.id')
+            ->where('user_id_connection', $userId)
+            ->where('is_accepted', 0)
+            ->where('is_blocked', 0);
+        $result->requested_connections = $this->_database->get()->{$this->_return_type(1)}();
+        
         return $result;
     }
     

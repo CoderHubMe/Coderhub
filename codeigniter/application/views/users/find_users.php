@@ -42,7 +42,7 @@
   $(document).ready(function() {
     $("tr[data-user-id]").click(function(e) {
       e.preventDefault();
-      window.location.href = "<?= base_url('users/show_user') ?>" + '/' + $(this).attr('data-user-id')
+      window.location.href = "<?= base_url('users/profile') ?>" + '/' + $(this).attr('data-user-id')
     });
   });
 </script>
