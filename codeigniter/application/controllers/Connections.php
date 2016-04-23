@@ -33,7 +33,7 @@ class Connections extends MY_Controller {
                 $this->connection->insert(array('user_id_requestor' => $user_id_requestor, 'user_id_connection' => $user_id_connection));
             }
             
-            // redirect('users/profile/' . $user_id_requestor);
+            redirect('users/profile/' . $user_id_requestor);
         }
         
     }

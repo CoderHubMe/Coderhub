@@ -14,10 +14,34 @@
             <b><?= count($user->accepted_connections) == 1 ? 'Connection' : 'Connections' ?></b> <a class="pull-right"><?= count($user->accepted_connections) ?></a>
           </li>
         </ul>
-      <?php if($user->id !== $_SESSION['userId']): ?>
-        
-        <a href="<?= base_url('connections/request_connection/' . $_SESSION['userId'] . '/' . $user->id) ?>" class="btn btn-primary btn-block"><b>Connect With Me</b></a>
-      <?php endif ?>
+        <?php 
+          $stopFlag = false;
+          if(!$stopFlag) {
+            foreach($user->accepted_connections as $connection) {
+              if($connection->id == $_SESSION['userId']) {
+                echo 'You Are Connected!';
+                $stopFlag = true;
+                break;
+              }
+            }
+          }
+          
+          if(!$stopFlag){
+            foreach($user->requested_connections as $connection) {
+              if($connection->id == $_SESSION['userId']) {
+                echo 'Waiting on them to accept your connection request';
+                $stopFlag = true;
+                break;
+              }
+            }
+          }
+          
+          if(!$stopFlag) {
+            if($user->id !== $_SESSION['userId']) {
+              echo "<a href='" . base_url('connections/request_connection/' . $_SESSION['userId'] . '/' . $user->id) ."' class='btn btn-primary btn-block'><b>Connect With Me</b></a>";
+            }
+          }
+        ?>
       </div>
       <!-- /.box-body -->
     </div>
