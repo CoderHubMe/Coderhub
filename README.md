@@ -13,16 +13,17 @@ CoderHub.me was built using the CodeIgniter framework and styled using the Admin
   - MySQL
   - PHP5
 
-**Instructions**
+**Instructions** 
+
 1. Clone this repo into the directory of your choice. Commonly, you will use `/var/www/`. 
 2. Configure Apache
-    - Create and enable a configuration file and set the DocumentRoot to `/var/www/public`. See the sample.conf file in the installation directory of this repo
-    - Enable the Apache2 ReWrite mod using the command `sudo a2enmod rewrite`
+  - Create and enable a configuration file and set the DocumentRoot to `/var/www/public`. See the sample.conf file in the installation directory of this repo
+  - Enable the Apache2 ReWrite mod using the command `sudo a2enmod rewrite`
 3. Configure the database
-    1. Run the following command to configure the database `mysql < installation/database_install_script.sql`
+  - Run the following command to configure the database `mysql < installation/database_install_script.sql`
 4. Configure the application
-    - Go to the `codeigniter/application/config` directory
-    - Open `database.php.default` and fill out the details for your database (hostname, username, password)
-    - Rename the file `database.php.default` to `database.php`
-    - Open the `config.php.default` and change the `$config['base_url']` to the url of your system.
-    - Rename the file `config.php.default` to `config.php`
+  - Go to the `codeigniter/application/config` directory
+  - Open `database.php.default` and fill out the details for your database (hostname, username, password)
+  - Rename the file `database.php.default` to `database.php`
+  - Open the `config.php.default` and change the `$config['base_url']` to the url of your system.
+  - Rename the file `config.php.default` to `config.php`
