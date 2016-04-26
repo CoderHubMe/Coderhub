@@ -16,6 +16,10 @@
         </ul>
         <?php 
           $stopFlag = false;
+          if(!isset($_SESSION['userId'])) {
+            $stopFlag = true;
+          }
+          
           if(!$stopFlag) {
             foreach($user->accepted_connections as $connection) {
               if($connection->id == $_SESSION['userId']) {
@@ -81,7 +85,7 @@
         <li><a href="#education_history" data-toggle="tab">Education History</a></li>
         <li><a href="#github" data-toggle="tab">GitHub</a></li>
         <li><a href="#connections" data-toggle="tab">Connections</a></li>
-      <?php if($user->id === $_SESSION['userId']): ?>
+      <?php if(isset($_SESSION['userId']) && $user->id === $_SESSION['userId']): ?>
         <li><a href="#pending_connections" data-toggle="tab">Pending Connections</a></li>
       <?php endif ?>
       </ul>
@@ -118,7 +122,7 @@
         <!-- /.tab-pane -->
         <div class="tab-pane" id="github">
           <?php
-            if(strcmp($_SESSION['token'], '') == false) {
+            if(isset($_SESSION['token']) && strcmp($_SESSION['token'], '') == false) {
           ?>
               <div class="social-auth-links text-center">
                 <p>You are not connected to GitHub!</p>
@@ -132,7 +136,7 @@
                 </form>
               </div>
           <?php 
-            } else {
+            } elseif(isset($_SESSION['user_github'])) {
               $response = git_repos($_SESSION['user_github']);
               $repos = json_decode($response, true);
               foreach($repos as $repo) {
@@ -158,7 +162,7 @@
         <?php endforeach ?>
         </div>
       <!-- /.tab-content -->
-      <?php if($user->id === $_SESSION['userId']): ?>
+      <?php if(isset($_SESSION['userId']) && $user->id === $_SESSION['userId']): ?>
         <div class="tab-pane" id="pending_connections">
         <?php foreach($user->requested_connections as $connection): ?>
           <!-- Post -->
