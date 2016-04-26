@@ -31,7 +31,7 @@ class Users extends MY_Controller {
             'title' => '',
             'subtitle' => '',
             'breadcrumbs' => array(
-                'Users' => base_url("users"),
+                'Users' => base_url("users/find_users"),
                 $data->fname . ' ' . $data->lname => base_url("users/profile/" . $data->id)
                 )
             )
