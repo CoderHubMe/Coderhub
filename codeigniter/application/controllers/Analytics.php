@@ -34,7 +34,7 @@ class Analytics extends MY_Controller {
    public function connAndBlockedConnOverTime() {
        if($databaseResult = $this->analytics->connAndBlockedConnOverTime()) {
            foreach($databaseResult as $row) {
-               $result['labels'][] = $row->label;
+               $result['labels'][] = $row->monthname . ' ' . $row->year;
                $result['accepted_data'][] = $row->count_accepted;
                $result['blocked_data'][] = $row->count_blocked;
            }
