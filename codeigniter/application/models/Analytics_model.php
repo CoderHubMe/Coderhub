@@ -21,7 +21,9 @@ class Analytics_model extends MY_Model {
     
     public function connAndBlockedConnOverTime() {
         $result = $this->_database
-            ->select("IF(is_accepted = 1, CONCAT(MONTHNAME(date_accepted), ' ', YEAR(date_accepted)), CONCAT(MONTHNAME(date_blocked), ' ', YEAR(date_blocked))) as label,
+            ->select("IF(is_accepted = 1, MONTHNAME(date_accepted), MONTHNAME(date_blocked)) as monthname,
+            	IF(is_accepted = 1, MONTH(date_accepted), MONTH(date_blocked)) as month,
+            	IF(is_accepted = 1, YEAR(date_accepted), YEAR(date_blocked)) as year,
                 COUNT(IF(is_accepted = 1, 1, null)) as count_accepted,
                 COUNT(IF(is_blocked = 1, 1, null)) as count_blocked")
             ->from('connections')
@@ -34,8 +36,8 @@ class Analytics_model extends MY_Model {
                 ->where("date_blocked is not null")
             ->group_end()
             ->group_end() // IDK why, but this is required for proper parentheses - Pearse
-            ->group_by('label')
-            ->order_by('label')
+            ->group_by('year, month')
+            ->order_by('year, month')
             ->get()
             ->{$this->_return_type(1)}();
             
