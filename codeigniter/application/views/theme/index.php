@@ -31,6 +31,9 @@
   <!-- AdminLTE for demo purposes -->
   <script src="<?= base_url('dist/js/demo.js') ?>"></script>
   
+  <!--Chart JS CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.js"></script>
+  
   <?php
     foreach($external_scripts as $script) {
       echo "<script src='{$script}'></script>";
